@@ -1,9 +1,7 @@
-// Seleccionamos todos los botones de filtro
+// Filtrar videos
 const filterButtons = document.querySelectorAll('.filter-btn');
-// Seleccionamos todos los videos
 const videos = document.querySelectorAll('.video');
 
-// Función para filtrar videos
 filterButtons.forEach(button => {
     button.addEventListener('click', () => {
         const genre = button.getAttribute('data-genre');
@@ -15,5 +13,20 @@ filterButtons.forEach(button => {
                 video.style.display = 'none';
             }
         });
+    });
+});
+
+// Reproductor fijo
+const playerIframe = document.getElementById('player-iframe');
+const playerTitle = document.getElementById('player-title');
+
+videos.forEach(video => {
+    video.addEventListener('click', () => {
+        const url = video.getAttribute('data-url');
+        const title = video.querySelector('p').textContent;
+
+        // Cambiar URL y título del reproductor
+        playerIframe.src = url;
+        playerTitle.textContent = title;
     });
 });
