@@ -1,7 +1,24 @@
 // scripts.js
-// Este archivo se deja preparado por si más adelante
-// quieres agregar funciones interactivas (filtros, reproductor interno, etc.)
-// Actualmente, la página solo abre las canciones directamente en YouTube.
+// Este archivo permite que los videos se reproduzcan en el reproductor superior
+// cuando haces clic en las miniaturas de la galería.
 
-// Ejemplo: mostrar mensaje en consola
-console.log("🎵 Página musical de Nicol  💖");
+const videoPlayer = document.getElementById("videoPlayer");
+const nowPlaying = document.getElementById("nowPlaying");
+
+// Selecciona todas las tarjetas de video
+const cards = document.querySelectorAll(".card");
+
+cards.forEach(card => {
+  card.addEventListener("click", () => {
+    const videoId = card.dataset.video;
+    const title = card.dataset.title;
+
+    // Cambia el video del iframe
+    videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+
+    // Actualiza el texto de "Reproduciendo"
+    nowPlaying.textContent = `🎶 Reproduciendo: ${title}`;
+  });
+});
+
+console.log("💖 Página musical de Nicol con reproductor integrada lista!");
