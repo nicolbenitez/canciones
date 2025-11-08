@@ -1,61 +1,71 @@
 // ========================
-// Crear miniaturas y reproductores
+// YouTube reproductor y miniaturas
 // ========================
 let players = [];
-const videoContainers = document.querySelectorAll('.video-container');
 let activeVideo = null;
+const videoContainers = document.querySelectorAll('.video-container');
 
-videoContainers.forEach((container, index) => {
-    // Crear imagen y título
+videoContainers.forEach((container, index)=>{
+    // Crear miniatura y título
     const img = document.createElement('img');
     img.src = container.dataset.img;
     const title = document.createElement('div');
     title.className = 'title';
     title.innerText = container.dataset.title;
+
+    // Botón para abrir en YouTube
+    const ytButton = document.createElement('button');
+    ytButton.className = 'yt-link';
+    ytButton.innerText = 'Ver en YouTube';
+    ytButton.onclick = (e) => {
+        e.stopPropagation();
+        window.open(`https://www.youtube.com/watch?v=${container.dataset.id}`, '_blank');
+    };
+
     container.appendChild(img);
     container.appendChild(title);
+    container.appendChild(ytButton);
 
-    // Reproducir video al hacer clic
-    container.addEventListener('click', () => {
-        container.innerHTML = ''; // Quitar miniatura
+    // Reproducir video embebido al hacer clic
+    container.addEventListener('click', ()=>{
+        container.innerHTML = '';
         players[index] = new YT.Player(container, {
-            height: '220',
-            width: '100%',
+            height:'220',
+            width:'100%',
             videoId: container.dataset.id,
-            playerVars: { 'rel':0,'modestbranding':1 },
-            events: { 'onStateChange': onPlayerStateChange }
+            playerVars:{'rel':0,'modestbranding':1,'autoplay':1},
+            events:{'onStateChange': onPlayerStateChange}
         });
     });
 });
 
-function onPlayerStateChange(event) {
-    if (event.data == YT.PlayerState.PLAYING) activeVideo = event.target;
-    else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) activeVideo = null;
+function onPlayerStateChange(event){
+    if(event.data == YT.PlayerState.PLAYING) activeVideo = event.target;
+    else if(event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) activeVideo = null;
 }
 
 // ========================
 // Filtro por género
 // ========================
 const videos = [
-    { id:'your_video_id1', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg', title:'Tu Boda'},
-    { id:'your_video_id2', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg', title:'Suiza'},
-    { id:'your_video_id3', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg', title:'We Owen'},
-    { id:'your_video_id4', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg', title:'That Should Be Me'},
-    { id:'your_video_id5', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id5/hqdefault.jpg', title:'Canción 5'},
-    { id:'your_video_id6', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id6/hqdefault.jpg', title:'Canción 6'}
+    {id:'your_video_id1', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg', title:'Tu Boda'},
+    {id:'your_video_id2', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg', title:'Suiza'},
+    {id:'your_video_id3', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg', title:'We Owen'},
+    {id:'your_video_id4', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg', title:'That Should Be Me'},
+    {id:'your_video_id5', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id5/hqdefault.jpg', title:'Canción 5'},
+    {id:'your_video_id6', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id6/hqdefault.jpg', title:'Canción 6'}
 ];
 
-function filterVideos(genre) {
+function filterVideos(genre){
     const container = document.querySelector('.filtered-videos');
     container.innerHTML = '';
-    const filtered = videos.filter(v => v.genre===genre);
-    filtered.forEach(v=>{
+    const filtered = videos.filter(v=>v.genre===genre);
+    filtered.forEach((v)=>{
         const div = document.createElement('div');
         div.className = 'video-container';
         div.dataset.id = v.id;
         div.dataset.img = v.img;
         div.dataset.title = v.title;
-        container.appendChild(div);
 
         // Miniatura y título
         const img = document.createElement('img');
@@ -63,25 +73,38 @@ function filterVideos(genre) {
         const title = document.createElement('div');
         title.className = 'title';
         title.innerText = v.title;
+
+        // Botón YouTube
+        const ytButton = document.createElement('button');
+        ytButton.className = 'yt-link';
+        ytButton.innerText = 'Ver en YouTube';
+        ytButton.onclick = (e)=>{
+            e.stopPropagation();
+            window.open(`https://www.youtube.com/watch?v=${v.id}`,'_blank');
+        };
+
         div.appendChild(img);
         div.appendChild(title);
+        div.appendChild(ytButton);
 
         // Reproducir al clic
-        div.addEventListener('click', () => {
+        div.addEventListener('click', ()=>{
             div.innerHTML = '';
-            new YT.Player(div, {
-                height: '220',
-                width: '100%',
-                videoId: v.id,
-                playerVars: { 'rel':0,'modestbranding':1 },
-                events: { 'onStateChange': onPlayerStateChange }
+            new YT.Player(div,{
+                height:'220',
+                width:'100%',
+                videoId:v.id,
+                playerVars:{'rel':0,'modestbranding':1,'autoplay':1},
+                events:{'onStateChange': onPlayerStateChange}
             });
         });
+
+        container.appendChild(div);
     });
 }
 
 // ========================
-// Partículas animadas
+// Fondo animado de partículas
 // ========================
 const canvas = document.getElementById('background');
 const ctx = canvas.getContext('2d');
@@ -89,21 +112,21 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 class Particle {
-    constructor() { this.reset(); }
-    reset() {
+    constructor(){ this.reset(); }
+    reset(){
         this.x = Math.random()*canvas.width;
         this.y = Math.random()*canvas.height;
         this.size = Math.random()*3+1;
         this.speed = Math.random()*0.5+0.2;
         this.color = `hsl(${Math.random()*360},70%,60%)`;
     }
-    draw() {
+    draw(){
         ctx.beginPath();
         ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
         ctx.fillStyle = this.color;
         ctx.fill();
     }
-    update(active) {
+    update(active){
         this.y -= this.speed + (active?2:0);
         if(this.y<0) this.y = canvas.height;
         this.draw();
@@ -113,7 +136,7 @@ class Particle {
 let particles = [];
 for(let i=0;i<150;i++) particles.push(new Particle());
 
-function animate() {
+function animate(){
     ctx.clearRect(0,0,canvas.width,canvas.height);
     const active = activeVideo != null;
     particles.forEach(p=>p.update(active));
