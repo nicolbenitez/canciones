@@ -1,0 +1,19 @@
+// Seleccionamos todos los botones de filtro
+const filterButtons = document.querySelectorAll('.filter-btn');
+// Seleccionamos todos los videos
+const videos = document.querySelectorAll('.video');
+
+// Función para filtrar videos
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        const genre = button.getAttribute('data-genre');
+
+        videos.forEach(video => {
+            if (genre === 'all' || video.getAttribute('data-genre') === genre) {
+                video.style.display = 'block';
+            } else {
+                video.style.display = 'none';
+            }
+        });
+    });
+});
