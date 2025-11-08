@@ -7,53 +7,23 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fondo animado -->
     <canvas id="background"></canvas>
 
-    <!-- Encabezado -->
     <header>
         <img src="https://img.icons8.com/ios-filled/50/ffffff/musical-notes.png" alt="Logo musical" class="logo">
         <h1>Nicol</h1>
     </header>
 
-    <!-- Sección de videos -->
     <main>
         <h2>Mis canciones favoritas</h2>
         <div class="video-gallery">
-            <!-- Cada canción -->
-            <div class="video-container" 
-                 data-id="your_video_id1" 
-                 data-title="Tu Boda" 
-                 data-img="https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg"></div>
-
-            <div class="video-container" 
-                 data-id="your_video_id2" 
-                 data-title="Suiza" 
-                 data-img="https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg"></div>
-
-            <div class="video-container" 
-                 data-id="your_video_id3" 
-                 data-title="We Owen" 
-                 data-img="https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg"></div>
-
-            <div class="video-container" 
-                 data-id="your_video_id4" 
-                 data-title="That Should Be Me" 
-                 data-img="https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg"></div>
-
-            <div class="video-container" 
-                 data-id="your_video_id5" 
-                 data-title="Canción 5" 
-                 data-img="https://i.ytimg.com/vi/your_video_id5/hqdefault.jpg"></div>
-
-            <div class="video-container" 
-                 data-id="your_video_id6" 
-                 data-title="Canción 6" 
-                 data-img="https://i.ytimg.com/vi/your_video_id6/hqdefault.jpg"></div>
+            <div class="video-container" data-id="your_video_id1" data-title="Tu Boda" data-img="https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg"></div>
+            <div class="video-container" data-id="your_video_id2" data-title="Suiza" data-img="https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg"></div>
+            <div class="video-container" data-id="your_video_id3" data-title="We Owen" data-img="https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg"></div>
+            <div class="video-container" data-id="your_video_id4" data-title="That Should Be Me" data-img="https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg"></div>
         </div>
     </main>
 
-    <!-- Playlist por género -->
     <section class="playlist">
         <h2>Explora por géneros</h2>
         <div class="genre-buttons">
@@ -64,7 +34,6 @@
         <div class="filtered-videos"></div>
     </section>
 
-    <!-- API de YouTube -->
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
