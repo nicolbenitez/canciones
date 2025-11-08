@@ -88,6 +88,20 @@ main {
     font-size: 0.9em;
 }
 
+/* Botón para abrir YouTube */
+.video-container .yt-link {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(255,111,97,0.8);
+    color: #fff;
+    border: none;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 0.8em;
+    cursor: pointer;
+}
+
 /* Playlist por género */
 .playlist {
     padding: 20px;
