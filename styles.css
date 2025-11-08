@@ -1,104 +1,120 @@
-:root{
-  --bg:#ffebf2;
-  --card:#ffe6ef;
-  --accent:#ff80bf;
-  --text:#4a2e3d;
+:root {
+  --bg: #ffebf2;
+  --card: #ffe6ef;
+  --accent: #ff80bf;
+  --text: #4a2e3d;
 }
 
 /* Fondo y texto */
-body{
-  margin:0;
-  font-family:'Poppins',sans-serif;
-  background:var(--bg);
-  color:var(--text);
+body {
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  background: var(--bg);
+  color: var(--text);
 }
 
 /* Contenedor principal */
-.container{
-  max-width:1000px;
-  margin:auto;
-  padding:20px;
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
 }
 
 /* Encabezado */
-.header{
-  display:flex;
-  align-items:center;
-  gap:16px;
+.header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
 }
-.logo{
-  background:var(--accent);
-  padding:8px;
-  border-radius:12px;
-  color:white;
-  display:flex;
-  align-items:center;
-  justify-content:center;
+.logo {
+  background: var(--accent);
+  padding: 8px;
+  border-radius: 12px;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.title{
-  font-size:2.4rem;
-  margin:0;
-  color:var(--accent);
+.title {
+  font-size: 2.4rem;
+  margin: 0;
+  color: var(--accent);
 }
-.subtitle{
-  margin:0;
-  color:#8c5b73;
+.subtitle {
+  margin: 0;
+  color: #8c5b73;
+}
+
+/* Reproductor */
+.player {
+  margin-top: 30px;
+  text-align: center;
+}
+.player iframe {
+  border-radius: 14px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+}
+.now-playing {
+  margin-top: 10px;
+  color: var(--accent);
+  font-weight: 600;
 }
 
 /* Galería */
-.gallery h3{
-  margin-top:30px;
-  text-align:center;
-  color:var(--accent);
+.gallery h3 {
+  margin-top: 40px;
+  text-align: center;
+  color: var(--accent);
 }
-.grid{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-  gap:14px;
-  margin-top:16px;
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+  margin-top: 16px;
 }
-.card{
-  background:var(--card);
-  border-radius:12px;
-  padding:10px;
-  text-align:center;
-  transition:transform .3s,box-shadow .3s;
+.card {
+  background: var(--card);
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .3s, box-shadow .3s;
 }
-.card:hover{
-  transform:translateY(-4px);
-  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
-.card img{
-  width:100%;
-  border-radius:10px;
+.card img {
+  width: 100%;
+  border-radius: 10px;
 }
-.caption{
-  margin-top:8px;
-  font-size:0.95rem;
-  color:var(--text);
+.caption {
+  margin-top: 8px;
+  font-size: 0.95rem;
+  color: var(--text);
 }
 
 /* Pie de página */
-.footer{
-  text-align:center;
-  margin-top:40px;
-  color:#7a4d66;
+.footer {
+  text-align: center;
+  margin-top: 40px;
+  color: #7a4d66;
 }
 
-/* Fondo animado */
-body::before{
-  content:"";
-  position:fixed;
-  inset:0;
-  z-index:-1;
+/* Fondo animado suave */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  z-index: -1;
   background:
-    radial-gradient(400px 300px at 10% 20%, rgba(255,128,191,0.2), transparent 20%),
-    radial-gradient(300px 200px at 85% 80%, rgba(255,200,230,0.3), transparent 20%);
+    radial-gradient(400px 300px at 10% 20%, rgba(255, 128, 191, 0.2), transparent 20%),
+    radial-gradient(300px 200px at 85% 80%, rgba(255, 200, 230, 0.3), transparent 20%);
   animation: float 12s linear infinite;
 }
 
-@keyframes float{
-  0%{transform:translateY(0)}
-  50%{transform:translateY(-10px)}
-  100%{transform:translateY(0)}
+@keyframes float {
+  0% { transform: translateY(0) }
+  50% { transform: translateY(-10px) }
+  100% { transform: translateY(0) }
 }
