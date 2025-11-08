@@ -4,24 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mi Música Favorita</title>
-    <!-- Vinculación del CSS -->
     <link rel="stylesheet" href="styles.css">
-    <!-- Ícono de la página -->
     <link rel="icon" href="logo.png" type="image/png">
 </head>
 <body>
-    <!-- Fondo animado -->
     <div class="background"></div>
 
-    <!-- Contenedor principal -->
     <div class="container">
-        <!-- Título principal -->
         <header>
             <img src="logo.png" alt="Logo musical" class="logo">
             <h1>Mi Música Favorita</h1>
         </header>
 
-        <!-- Sección de filtros por género -->
         <section class="filters">
             <button class="filter-btn" data-genre="all">Todos</button>
             <button class="filter-btn" data-genre="pop">Pop</button>
@@ -29,37 +23,40 @@
             <button class="filter-btn" data-genre="rap">Rap</button>
         </section>
 
-        <!-- Galería de videos -->
         <section class="gallery">
-            <!-- Cada video tiene un género definido para filtrar -->
-            <div class="video" data-genre="pop">
+            <div class="video" data-genre="pop" data-url="https://www.youtube.com/embed/3JZ4pnNtyxQ">
                 <iframe src="https://www.youtube.com/embed/3JZ4pnNtyxQ" frameborder="0" allowfullscreen></iframe>
                 <p>Song 1 - Artista Pop</p>
             </div>
-            <div class="video" data-genre="rock">
+            <div class="video" data-genre="rock" data-url="https://www.youtube.com/embed/fJ9rUzIMcZQ">
                 <iframe src="https://www.youtube.com/embed/fJ9rUzIMcZQ" frameborder="0" allowfullscreen></iframe>
                 <p>Song 2 - Artista Rock</p>
             </div>
-            <div class="video" data-genre="rap">
+            <div class="video" data-genre="rap" data-url="https://www.youtube.com/embed/1g0tX5vG1Ek">
                 <iframe src="https://www.youtube.com/embed/1g0tX5vG1Ek" frameborder="0" allowfullscreen></iframe>
                 <p>Song 3 - Artista Rap</p>
             </div>
-            <div class="video" data-genre="pop">
+            <div class="video" data-genre="pop" data-url="https://www.youtube.com/embed/kXYiU_JCYtU">
                 <iframe src="https://www.youtube.com/embed/kXYiU_JCYtU" frameborder="0" allowfullscreen></iframe>
                 <p>Song 4 - Artista Pop</p>
             </div>
-            <div class="video" data-genre="rock">
+            <div class="video" data-genre="rock" data-url="https://www.youtube.com/embed/L_jWHffIx5E">
                 <iframe src="https://www.youtube.com/embed/L_jWHffIx5E" frameborder="0" allowfullscreen></iframe>
                 <p>Song 5 - Artista Rock</p>
             </div>
-            <div class="video" data-genre="rap">
+            <div class="video" data-genre="rap" data-url="https://www.youtube.com/embed/2vjPBrBU-TM">
                 <iframe src="https://www.youtube.com/embed/2vjPBrBU-TM" frameborder="0" allowfullscreen></iframe>
                 <p>Song 6 - Artista Rap</p>
             </div>
         </section>
     </div>
 
-    <!-- Vinculación del JavaScript -->
+    <!-- Reproductor fijo en la parte inferior -->
+    <div class="player">
+        <iframe id="player-iframe" src="" frameborder="0" allowfullscreen></iframe>
+        <p id="player-title">Selecciona una canción para reproducir</p>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
