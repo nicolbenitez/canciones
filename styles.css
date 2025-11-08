@@ -6,13 +6,20 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Fondo animado ocupa toda la pantalla */
 body, html {
     width: 100%;
     height: 100%;
     overflow-x: hidden;
     background: #111;
     color: #fff;
+}
+
+/* Canvas de fondo visualizador */
+canvas {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 0;
 }
 
 /* Encabezado */
@@ -36,7 +43,7 @@ header h1 {
     height: 50px;
 }
 
-/* Sección de videos */
+/* Galería de videos */
 main {
     padding: 20px;
     text-align: center;
@@ -64,7 +71,7 @@ iframe:hover {
     box-shadow: 0 0 20px rgba(255, 111, 97, 0.6);
 }
 
-/* Sección de playlist */
+/* Playlist por géneros */
 .playlist {
     padding: 20px;
     text-align: center;
@@ -96,10 +103,11 @@ iframe:hover {
     gap: 20px;
 }
 
-/* Canvas de fondo animado */
-canvas {
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 0;
+/* Audio player estilo */
+#audioPlayer {
+    display: block;
+    margin: 20px auto;
+    width: 300px;
+    z-index: 1;
+    position: relative;
 }
