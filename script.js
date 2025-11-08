@@ -1,151 +1,76 @@
-// ========================
-// YouTube reproductor y miniaturas
-// ========================
-let players = [];
-let activeVideo = null;
-const videoContainers = document.querySelectorAll('.video-container');
+/* scripts.js - Lógica de interacción
+ - Maneja clicks en miniaturas
+ - Filtrado por género/artista
+ - Actualiza el reproductor principal (iframe)
+*/
 
-videoContainers.forEach((container, index)=>{
-    // Crear miniatura y título
-    const img = document.createElement('img');
-    img.src = container.dataset.img;
-    const title = document.createElement('div');
-    title.className = 'title';
-    title.innerText = container.dataset.title;
+// Crea la URL embebida de YouTube a partir del video ID
+function youtubeEmbedUrl(id){
+  // autoplay=1 permitirá que empiece a reproducir al cargar (nota: algunos navegadores bloquean autoplay si no hay interacción)
+  return `https://www.youtube.com/embed/${id}?rel=0&showinfo=0&autoplay=1`;
+}
 
-    // Botón para abrir en YouTube
-    const ytButton = document.createElement('button');
-    ytButton.className = 'yt-link';
-    ytButton.innerText = 'Ver en YouTube';
-    ytButton.onclick = (e) => {
-        e.stopPropagation();
-        window.open(`https://www.youtube.com/watch?v=${container.dataset.id}`, '_blank');
-    };
+// Inicializamos selectores
+const mainPlayer = document.getElementById('main-player');
+const nowTitle = document.getElementById('now-title');
+const nowArtist = document.getElementById('now-artist');
+const playButtons = document.querySelectorAll('.play');
+const filterButtons = document.querySelectorAll('.filter-btn');
+const cards = document.querySelectorAll('.card');
 
-    container.appendChild(img);
-    container.appendChild(title);
-    container.appendChild(ytButton);
+// Función para cargar un video en el reproductor principal
+function loadVideo(id, title, artist){
+  mainPlayer.src = youtubeEmbedUrl(id);
+  nowTitle.textContent = title;
+  nowArtist.textContent = artist;
+}
 
-    // Reproducir video embebido al hacer clic
-    container.addEventListener('click', ()=>{
-        container.innerHTML = '';
-        players[index] = new YT.Player(container, {
-            height:'220',
-            width:'100%',
-            videoId: container.dataset.id,
-            playerVars:{'rel':0,'modestbranding':1,'autoplay':1},
-            events:{'onStateChange': onPlayerStateChange}
-        });
-    });
+// Asignar evento a cada botón de reproducción (miniaturas)
+playButtons.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    const id = btn.dataset.video;
+    const title = btn.dataset.title || 'Canción';
+    const artist = btn.dataset.artist || 'Artista';
+    loadVideo(id, title, artist);
+  });
 });
 
-function onPlayerStateChange(event){
-    if(event.data == YT.PlayerState.PLAYING) activeVideo = event.target;
-    else if(event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) activeVideo = null;
-}
+// Filtrado simple: muestra/oculta tarjetas según data-genre o data-artist
+filterButtons.forEach(fb => {
+  fb.addEventListener('click', () => {
+    // actualizar estado visual
+    filterButtons.forEach(b=>b.classList.remove('active'));
+    fb.classList.add('active');
 
-// ========================
-// Filtro por género
-// ========================
-const videos = [
-    {id:'your_video_id1', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg', title:'Tu Boda'},
-    {id:'your_video_id2', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg', title:'Suiza'},
-    {id:'your_video_id3', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg', title:'We Owen'},
-    {id:'your_video_id4', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg', title:'That Should Be Me'},
-    {id:'your_video_id5', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id5/hqdefault.jpg', title:'Canción 5'},
-    {id:'your_video_id6', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id6/hqdefault.jpg', title:'Canción 6'}
-];
+    const filter = fb.dataset.filter;
 
-function filterVideos(genre){
-    const container = document.querySelector('.filtered-videos');
-    container.innerHTML = '';
-    const filtered = videos.filter(v=>v.genre===genre);
-    filtered.forEach((v)=>{
-        const div = document.createElement('div');
-        div.className = 'video-container';
-        div.dataset.id = v.id;
-        div.dataset.img = v.img;
-        div.dataset.title = v.title;
+    cards.forEach(card => {
+      if(filter === 'all'){
+        card.style.display = '';
+        return;
+      }
 
-        // Miniatura y título
-        const img = document.createElement('img');
-        img.src = v.img;
-        const title = document.createElement('div');
-        title.className = 'title';
-        title.innerText = v.title;
+      // permitimos filtrar por "genre" o por artista-tag definidas en los botones
+      const genre = card.dataset.genre || '';
+      const artist = (card.dataset.artist || '').toLowerCase();
 
-        // Botón YouTube
-        const ytButton = document.createElement('button');
-        ytButton.className = 'yt-link';
-        ytButton.innerText = 'Ver en YouTube';
-        ytButton.onclick = (e)=>{
-            e.stopPropagation();
-            window.open(`https://www.youtube.com/watch?v=${v.id}`,'_blank');
-        };
-
-        div.appendChild(img);
-        div.appendChild(title);
-        div.appendChild(ytButton);
-
-        // Reproducir al clic
-        div.addEventListener('click', ()=>{
-            div.innerHTML = '';
-            new YT.Player(div,{
-                height:'220',
-                width:'100%',
-                videoId:v.id,
-                playerVars:{'rel':0,'modestbranding':1,'autoplay':1},
-                events:{'onStateChange': onPlayerStateChange}
-            });
-        });
-
-        container.appendChild(div);
+      if(filter === 'regional' || filter === 'pop' || filter === 'country'){
+        card.style.display = (genre === filter) ? '' : 'none';
+      } else if(filter.startsWith('artista')){
+        // ejemplo: data-filter="artista-owen"
+        const wanted = filter.split('-').slice(1).join(' ');
+        card.style.display = artist.includes(wanted) ? '' : 'none';
+      } else {
+        // por defecto ocultar
+        card.style.display = 'none';
+      }
     });
-}
-
-// ========================
-// Fondo animado de partículas
-// ========================
-const canvas = document.getElementById('background');
-const ctx = canvas.getContext('2d');
-canvas.width = window.innerWidth;
-canvas.height = window.innerHeight;
-
-class Particle {
-    constructor(){ this.reset(); }
-    reset(){
-        this.x = Math.random()*canvas.width;
-        this.y = Math.random()*canvas.height;
-        this.size = Math.random()*3+1;
-        this.speed = Math.random()*0.5+0.2;
-        this.color = `hsl(${Math.random()*360},70%,60%)`;
-    }
-    draw(){
-        ctx.beginPath();
-        ctx.arc(this.x,this.y,this.size,0,Math.PI*2);
-        ctx.fillStyle = this.color;
-        ctx.fill();
-    }
-    update(active){
-        this.y -= this.speed + (active?2:0);
-        if(this.y<0) this.y = canvas.height;
-        this.draw();
-    }
-}
-
-let particles = [];
-for(let i=0;i<150;i++) particles.push(new Particle());
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    const active = activeVideo != null;
-    particles.forEach(p=>p.update(active));
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-window.addEventListener('resize',()=>{
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  });
 });
+
+// Opcional: cargar primer video automáticamente (descomenta para autoload)
+// const first = document.querySelector('.play'); if(first){ first.click(); }
+
+// Nota: si quieres usar la API de iframe de YouTube para controlar play/pause/estado,
+// se puede integrar cargando la API y usando postMessage. Aquí hemos optado por cambiar el src
+// del iframe para mantener la solución simple y compatible.
