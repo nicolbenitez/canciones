@@ -6,7 +6,7 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Fondo animado */
+/* Fondo animado ocupa toda la pantalla */
 body, html {
     width: 100%;
     height: 100%;
@@ -46,20 +46,22 @@ main {
 
 .video-gallery {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
     margin-top: 20px;
 }
 
 iframe {
     width: 100%;
-    height: 200px;
-    border-radius: 10px;
-    transition: transform 0.3s;
+    height: 220px;
+    border-radius: 12px;
+    border: 2px solid rgba(255,255,255,0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
 }
 
 iframe:hover {
     transform: scale(1.05);
+    box-shadow: 0 0 20px rgba(255, 111, 97, 0.6);
 }
 
 /* Sección de playlist */
@@ -71,28 +73,30 @@ iframe:hover {
 }
 
 .genre-buttons button {
-    padding: 10px 20px;
+    padding: 12px 24px;
     margin: 10px;
-    background: #ff6f61;
+    background: linear-gradient(45deg, #ff6f61, #ff3b2e);
     border: none;
-    border-radius: 8px;
+    border-radius: 10px;
     color: #fff;
     cursor: pointer;
-    transition: background 0.3s;
+    font-weight: bold;
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
 .genre-buttons button:hover {
-    background: #ff3b2e;
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(255, 111, 97, 0.7);
 }
 
 .filtered-videos {
     margin-top: 20px;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 20px;
 }
 
-/* Fondo animado canvas */
+/* Canvas de fondo animado */
 canvas {
     position: fixed;
     top: 0;
