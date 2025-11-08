@@ -1,79 +1,67 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Nicol — Música</title>
-  <link rel="stylesheet" href="styles.css" />
-  <!-- Ícono musical -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff80bf' d='M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/727/727245.png">
+
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
 </head>
 
 <body>
-  <!-- Fondo animado con burbujas -->
-  <div id="bubbles"></div>
-
   <main class="container">
     <header class="header">
       <div class="logo">
-        <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
+        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
         </svg>
       </div>
       <h1 class="title">Nicol</h1>
-      <p class="subtitle">Mi lista de canciones favoritas 💕</p>
+      <p class="subtitle">Mis canciones favoritas 💖</p>
     </header>
 
     <!-- 🎧 Reproductor principal -->
-    <section class="player">
-      <iframe 
-        id="videoPlayer" 
-        width="100%" 
-        height="400" 
-        src="https://www.youtube.com/embed/sD9UX5_GiUc"
-        title="Reproductor de video de Nicol"
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-      </iframe>
-      <p id="nowPlaying" class="now-playing">🎶 Reproduciendo: Tu Boda — Óscar Maydon</p>
+    <section class="player-section">
+      <iframe id="player" src="https://www.youtube.com/embed/sD9UX5_GiUc" frameborder="0" allowfullscreen></iframe>
+      <p id="current-song">🎵 Reproduciendo: Tu Boda — Óscar Maydon</p>
     </section>
 
-    <!-- 🎶 Galería -->
+    <!-- 🎶 Galería de canciones -->
     <section class="gallery">
-      <h3>Galería de videos</h3>
-      <div id="videos" class="grid">
-
-        <div class="card" data-video="sD9UX5_GiUc" data-title="Tu Boda — Óscar Maydon">
-          <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda"/>
-          <div class="caption">Tu Boda — Óscar Maydon</div>
+      <h2>Mis canciones</h2>
+      <div class="grid">
+        <div class="card" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
+          <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda">
+          <p>Tu Boda — Óscar Maydon</p>
         </div>
 
-        <div class="card" data-video="SOh_BsKlajw" data-title="Suiza — Calle 24">
-          <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza"/>
-          <div class="caption">Suiza — Calle 24</div>
+        <div class="card" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
+          <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza">
+          <p>Suiza — Calle 24</p>
         </div>
 
-        <div class="card" data-video="-uvIf9cSegE" data-title="Made For You — Jake Owen">
-          <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You"/>
-          <div class="caption">Made For You — Jake Owen</div>
+        <div class="card" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
+          <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You">
+          <p>Made For You — Jake Owen</p>
         </div>
 
-        <div class="card" data-video="p5Jw-T4dVss" data-title="That Should Be Me — Justin Bieber">
-          <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me"/>
-          <div class="caption">That Should Be Me — Justin Bieber</div>
+        <div class="card" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
+          <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me">
+          <p>That Should Be Me — Justin Bieber</p>
         </div>
 
-        <div class="card" data-video="GGQmKA15VCk" data-title="What We Ain't Got — Jake Owen">
-          <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain't Got"/>
-          <div class="caption">What We Ain't Got — Jake Owen</div>
+        <div class="card" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
+          <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain’t Got">
+          <p>What We Ain’t Got — Jake Owen</p>
         </div>
-
       </div>
     </section>
 
     <footer class="footer">
-      <p>Diseñado para <strong>Nicol</strong> 💖 — Página musical con fondo animado y reproductor integrado</p>
+      <p>Diseñado por <strong>Nicol</strong> 💕 — Página musical rosada</p>
     </footer>
   </main>
 
