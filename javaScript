@@ -1,32 +1,63 @@
-// Filtrar videos
-const filterButtons = document.querySelectorAll('.filter-btn');
-const videos = document.querySelectorAll('.video');
+// Filtro de videos por género
+const videos = [
+    { id: 'your_video_id1', genre: 'pop' },
+    { id: 'your_video_id2', genre: 'rock' },
+    { id: 'your_video_id3', genre: 'balada' },
+    { id: 'your_video_id4', genre: 'pop' },
+    { id: 'your_video_id5', genre: 'rock' },
+    { id: 'your_video_id6', genre: 'balada' },
+];
 
-filterButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        const genre = button.getAttribute('data-genre');
-
-        videos.forEach(video => {
-            if (genre === 'all' || video.getAttribute('data-genre') === genre) {
-                video.style.display = 'block';
-            } else {
-                video.style.display = 'none';
-            }
-        });
+function filterVideos(genre) {
+    const container = document.querySelector('.filtered-videos');
+    container.innerHTML = '';
+    const filtered = videos.filter(v => v.genre === genre);
+    filtered.forEach(v => {
+        const iframe = document.createElement('iframe');
+        iframe.src = `https://www.youtube.com/embed/${v.id}`;
+        iframe.frameBorder = '0';
+        iframe.allowFullscreen = true;
+        container.appendChild(iframe);
     });
-});
+}
 
-// Reproductor fijo
-const playerIframe = document.getElementById('player-iframe');
-const playerTitle = document.getElementById('player-title');
+// Fondo animado con partículas suaves
+const canvas = document.getElementById('background');
+const ctx = canvas.getContext('2d');
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
 
-videos.forEach(video => {
-    video.addEventListener('click', () => {
-        const url = video.getAttribute('data-url');
-        const title = video.querySelector('p').textContent;
-
-        // Cambiar URL y título del reproductor
-        playerIframe.src = url;
-        playerTitle.textContent = title;
+let particles = [];
+for (let i = 0; i < 100; i++) {
+    particles.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+        r: Math.random() * 2 + 1,
+        dx: (Math.random() - 0.5) * 1,
+        dy: (Math.random() - 0.5) * 1
     });
+}
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    particles.forEach(p => {
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+        ctx.fillStyle = '#ff6f61';
+        ctx.fill();
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+    });
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// Ajuste canvas al redimensionar
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
 });
