@@ -1,59 +1,64 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nicol — Música</title>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/727/727245.png">
-
-  <!-- Fuente moderna -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Nicol — Mis Canciones</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/727/727245.png" />
 </head>
 
 <body>
+  <canvas id="bgCanvas"></canvas>
+
   <main class="container">
     <header class="header">
       <div class="logo">
-        <svg width="40" height="40" viewBox="0 0 24 24" aria-hidden="true">
-          <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
-        </svg>
+        <svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
       </div>
       <h1 class="title">Nicol</h1>
-      <p class="subtitle">Mis canciones favoritas 💖</p>
+      <p class="subtitle">🎶 Mi lista de canciones favoritas</p>
     </header>
 
-    <!-- 🎧 Reproductor principal -->
+    <!-- Reproductor principal -->
     <section class="player-section">
       <iframe id="player" src="https://www.youtube.com/embed/sD9UX5_GiUc" frameborder="0" allowfullscreen></iframe>
       <p id="current-song">🎵 Reproduciendo: Tu Boda — Óscar Maydon</p>
     </section>
 
-    <!-- 🎶 Galería de canciones -->
+    <!-- Filtros por género -->
+    <div class="filter-buttons">
+      <button onclick="filterSongs('all')">🎧 Todos</button>
+      <button onclick="filterSongs('regional')">🎤 Regional</button>
+      <button onclick="filterSongs('pop')">💗 Pop</button>
+      <button onclick="filterSongs('country')">🤠 Country</button>
+    </div>
+
+    <!-- Galería de canciones -->
     <section class="gallery">
-      <h2>Mis canciones</h2>
       <div class="grid">
-        <div class="card" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
+        <div class="card" data-genre="regional" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
           <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda">
           <p>Tu Boda — Óscar Maydon</p>
         </div>
 
-        <div class="card" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
+        <div class="card" data-genre="regional" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
           <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza">
           <p>Suiza — Calle 24</p>
         </div>
 
-        <div class="card" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
+        <div class="card" data-genre="country" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
           <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You">
           <p>Made For You — Jake Owen</p>
         </div>
 
-        <div class="card" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
+        <div class="card" data-genre="pop" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
           <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me">
           <p>That Should Be Me — Justin Bieber</p>
         </div>
 
-        <div class="card" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
+        <div class="card" data-genre="country" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
           <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain’t Got">
           <p>What We Ain’t Got — Jake Owen</p>
         </div>
@@ -61,7 +66,7 @@
     </section>
 
     <footer class="footer">
-      <p>Diseñado por <strong>Nicol</strong> 💕 — Página musical rosada</p>
+      <p>💖 Diseñado por <strong>Nicol</strong> — Página musical con estilo y ritmo 🎵</p>
     </footer>
   </main>
 
