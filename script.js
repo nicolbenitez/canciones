@@ -4,4 +4,4 @@
 // Actualmente, la página solo abre las canciones directamente en YouTube.
 
 // Ejemplo: mostrar mensaje en consola
-console.log("🎵 Página musical de Nicol cargada correctamente 💖");
+console.log("🎵 Página musical de Nicol  💖");
