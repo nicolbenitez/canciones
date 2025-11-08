@@ -5,14 +5,13 @@
     box-sizing: border-box;
 }
 
-/* Fuente moderna y juvenil */
 body {
     font-family: 'Poppins', sans-serif;
     color: #fff;
     overflow-x: hidden;
 }
 
-/* Fondo animado con gradiente */
+/* Fondo animado */
 .background {
     position: fixed;
     width: 100%;
@@ -23,22 +22,19 @@ body {
     z-index: -1;
 }
 
-/* Animación suave de fondo */
 @keyframes gradient {
     0% {background-position: 0% 50%;}
     50% {background-position: 100% 50%;}
     100% {background-position: 0% 50%;}
 }
 
-/* Contenedor principal */
 .container {
     width: 90%;
     max-width: 1200px;
     margin: 0 auto;
-    padding: 2rem 0;
+    padding: 2rem 0 5rem; /* Espacio inferior para el reproductor */
 }
 
-/* Header */
 header {
     display: flex;
     align-items: center;
@@ -56,7 +52,6 @@ header h1 {
     height: 60px;
 }
 
-/* Filtros de género */
 .filters {
     margin-bottom: 2rem;
     display: flex;
@@ -78,11 +73,21 @@ header h1 {
     background: rgba(255,255,255,0.5);
 }
 
-/* Galería de videos */
+/* Galería con efecto hover */
 .gallery {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.5rem;
+}
+
+.video {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+}
+
+.video:hover {
+    transform: scale(1.05);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
 }
 
 .video iframe {
@@ -96,4 +101,28 @@ header h1 {
     margin-top: 0.5rem;
     font-weight: 500;
     color: #fff;
+}
+
+/* Reproductor fijo */
+.player {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    gap: 1rem;
+    z-index: 100;
+}
+
+#player-iframe {
+    width: 200px;
+    height: 120px;
+    border-radius: 10px;
+}
+
+#player-title {
+    font-size: 1rem;
 }
