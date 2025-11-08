@@ -1,4 +1,3 @@
-<!-- index.html - Estructura principal de la página -->
 <!doctype html>
 <html lang="es">
 <head>
@@ -6,14 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Nicol — Música</title>
   <link rel="stylesheet" href="styles.css" />
-  <!-- favicon pequeño (icono musical) -->
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff4d6d' d='M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z'/%3E%3C/svg%3E">
+  <!-- Ícono musical -->
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23ff80bf' d='M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z'/%3E%3C/svg%3E">
 </head>
+
 <body>
   <main class="container">
     <header class="header">
       <div class="logo">
-        <!-- icono SVG/pequeño logo musical -->
         <svg width="44" height="44" viewBox="0 0 24 24" aria-hidden="true">
           <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
         </svg>
@@ -22,91 +21,51 @@
       <p class="subtitle">Mi lista de canciones favoritas</p>
     </header>
 
-    <section class="player-area">
-      <!-- Reproductor principal donde se cargan los vídeos al hacer clic -->
-      <div class="now-playing">
-        <div class="meta">
-          <h2 id="now-title">Selecciona una canción</h2>
-          <p id="now-artist">Galería — Reproductor integrado</p>
-        </div>
-        <div class="frame-wrap">
-          <!-- iframe que cambiará su src desde JS cuando el usuario elija una canción -->
-          <iframe id="main-player" src="" title="Reproductor principal" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-        </div>
-      </div>
-
-      <aside class="filters">
-        <h3>Organizar por</h3>
-        <div class="filter-buttons">
-          <button class="filter-btn active" data-filter="all">Todo</button>
-          <button class="filter-btn" data-filter="regional">Regional</button>
-          <button class="filter-btn" data-filter="pop">Pop</button>
-          <button class="filter-btn" data-filter="country">Country</button>
-          <button class="filter-btn" data-filter="artista-owen">Jake Owen</button>
-        </div>
-        <p class="hint">Haz clic en una miniatura para reproducirla aquí.</p>
-      </aside>
-    </section>
-
     <section class="gallery">
-      <h3>Galería de videos</h3>
+      <h3>🎶 Galería de videos</h3>
       <div id="videos" class="grid">
-        <!-- Cada tarjeta contiene atributos data para filtrar y el id de YouTube -->
-        <!-- Reemplaza los data-video con otros IDs si quieres otras versiones -->
 
-        <!-- Tu Boda — ejemplo (ID: sD9UX5_GiUc) -->
-        <div class="card" data-genre="regional" data-artist="Oscar Maydon">
-          <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda"/>
-          <button class="play" data-video="sD9UX5_GiUc" data-title="Tu Boda" data-artist="Óscar Maydon x Fuerza Regida">▶</button>
+        <!-- Canciones favoritas -->
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=sD9UX5_GiUc" target="_blank">
+            <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda"/>
+          </a>
           <div class="caption">Tu Boda — Óscar Maydon</div>
         </div>
 
-        <!-- Suiza — ejemplo (ID: SOh_BsKlajw) -->
-        <div class="card" data-genre="regional" data-artist="Calle 24">
-          <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza"/>
-          <button class="play" data-video="SOh_BsKlajw" data-title="Suiza" data-artist="Calle 24">▶</button>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=SOh_BsKlajw" target="_blank">
+            <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza"/>
+          </a>
           <div class="caption">Suiza — Calle 24</div>
         </div>
 
-        <!-- Jake Owen - Made For You (ID: -uvIf9cSegE) -->
-        <div class="card" data-genre="country" data-artist="Jake Owen">
-          <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You"/>
-          <button class="play" data-video="-uvIf9cSegE" data-title="Made For You" data-artist="Jake Owen">▶</button>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=-uvIf9cSegE" target="_blank">
+            <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You"/>
+          </a>
           <div class="caption">Made For You — Jake Owen</div>
         </div>
 
-        <!-- Justin Bieber - That Should Be Me (ID: p5Jw-T4dVss) -->
-        <div class="card" data-genre="pop" data-artist="Justin Bieber">
-          <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me"/>
-          <button class="play" data-video="p5Jw-T4dVss" data-title="That Should Be Me" data-artist="Justin Bieber">▶</button>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=p5Jw-T4dVss" target="_blank">
+            <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me"/>
+          </a>
           <div class="caption">That Should Be Me — Justin Bieber</div>
         </div>
 
-        <!-- Video extra - What We Ain't Got (ID: GGQmKA15VCk) -->
-        <div class="card" data-genre="country" data-artist="Jake Owen">
-          <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain't Got"/>
-          <button class="play" data-video="GGQmKA15VCk" data-title="What We Ain't Got" data-artist="Jake Owen">▶</button>
+        <div class="card">
+          <a href="https://www.youtube.com/watch?v=GGQmKA15VCk" target="_blank">
+            <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain't Got"/>
+          </a>
           <div class="caption">What We Ain't Got — Jake Owen</div>
-        </div>
-
-        <!-- Placeholder/extra - puedes cambiar IDs -->
-        <div class="card" data-genre="pop" data-artist="Artista X">
-          <img src="https://via.placeholder.com/320x180?text=Añadir+video" alt="Placeholder"/>
-          <button class="play" data-video="dQw4w9WgXcQ" data-title="Placeholder" data-artist="Artista X">▶</button>
-          <div class="caption">Placeholder — Reemplázame</div>
-        </div>
-
-        <div class="card" data-genre="regional" data-artist="Owen">
-          <img src="https://via.placeholder.com/320x180?text=Otro+video" alt="Placeholder 2"/>
-          <button class="play" data-video="qWHzbMGbneY" data-title="Tu Boda (otra)" data-artist="Óscar Maydon">▶</button>
-          <div class="caption">Tu Boda — alternativa</div>
         </div>
 
       </div>
     </section>
 
     <footer class="footer">
-      <p>Diseñado para <strong>Nicol</strong> — Página de ejemplo creada con HTML, CSS y JavaScript.</p>
+      <p>Diseñado para <strong>Nicol</strong> 💕 — Página rosada con enlaces a YouTube</p>
     </footer>
   </main>
 
