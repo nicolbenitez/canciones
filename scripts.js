@@ -1,61 +1,59 @@
-// scripts.js
-// 🎧 Control del reproductor y animación de burbujas musicales 💖
-
-const videoPlayer = document.getElementById("videoPlayer");
-const nowPlaying = document.getElementById("nowPlaying");
-const cards = document.querySelectorAll(".card");
-const bubblesContainer = document.getElementById("bubbles");
-
-// Cambiar video al hacer clic
-cards.forEach(card => {
-  card.addEventListener("click", () => {
-    const videoId = card.dataset.video;
-    const title = card.dataset.title;
-
-    // Cambia el video del iframe con autoplay
-    videoPlayer.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
-    nowPlaying.textContent = `🎶 Reproduciendo: ${title}`;
-  });
-});
-
-// 🌸 Crear burbujas musicales animadas
-function createBubble() {
-  const bubble = document.createElement("div");
-  bubble.classList.add("bubble");
-
-  // Posición aleatoria
-  bubble.style.left = Math.random() * 100 + "vw";
-  bubble.style.animationDuration = 6 + Math.random() * 4 + "s";
-
-  // A veces mostrar una nota musical 🎵
-  bubble.textContent = Math.random() > 0.5 ? "🎵" : "💗";
-
-  bubblesContainer.appendChild(bubble);
-
-  // Eliminar después de la animación
-  setTimeout(() => {
-    bubble.remove();
-  }, 10000);
+// 🎵 Cambia el video actual
+function playVideo(videoId, songName) {
+  const player = document.getElementById("player");
+  const currentSong = document.getElementById("current-song");
+  player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
+  currentSong.textContent = `🎶 Reproduciendo: ${songName}`;
 }
 
-// Crear burbujas cada medio segundo
-setInterval(createBubble, 600);
+// 🎧 Filtros por género
+function filterSongs(genre) {
+  const cards = document.querySelectorAll(".card");
+  cards.forEach(card => {
+    card.style.display = (genre === "all" || card.dataset.genre === genre) ? "block" : "none";
+  });
+}
 
-// Estilos dinámicos de burbujas
-const style = document.createElement("style");
-style.textContent = `
-  .bubble {
-    position: absolute;
-    bottom: -40px;
-    font-size: 20px;
-    opacity: 0.7;
-    animation: floatUp linear forwards;
-  }
-  @keyframes floatUp {
-    0% { transform: translateY(0); opacity: 0.8; }
-    100% { transform: translateY(-110vh); opacity: 0; }
-  }
-`;
-document.head.appendChild(style);
+// 🌸 Fondo animado con partículas suaves
+const canvas = document.getElementById("bgCanvas");
+const ctx = canvas.getContext("2d");
+let width, height;
+let particles = [];
 
-console.log("🌸 Página musical de Nicol cargada con burbujas animadas y reproductor activo!");
+function resize() {
+  width = canvas.width = window.innerWidth;
+  height = canvas.height = window.innerHeight;
+}
+window.addEventListener("resize", resize);
+resize();
+
+// Crear partículas rosadas
+for (let i = 0; i < 40; i++) {
+  particles.push({
+    x: Math.random() * width,
+    y: Math.random() * height,
+    r: Math.random() * 3 + 1,
+    dx: (Math.random() - 0.5) * 0.7,
+    dy: (Math.random() - 0.5) * 0.7,
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, width, height);
+  particles.forEach(p => {
+    ctx.beginPath();
+    ctx.fillStyle = "rgba(255,150,200,0.6)";
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fill();
+    p.x += p.dx;
+    p.y += p.dy;
+
+    // Rebote
+    if (p.x < 0 || p.x > width) p.dx *= -1;
+    if (p.y < 0 || p.y > height) p.dy *= -1;
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+
+console.log("🌷 Página musical de Nicol lista en GitHub Pages 🎶");
