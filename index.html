@@ -3,24 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicol - Mi música favorita</title>
+    <title>Nicol - Música</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fondo animado -->
+    <!-- Fondo animado con gradiente -->
     <canvas id="background"></canvas>
 
-    <!-- Encabezado principal -->
+    <!-- Encabezado -->
     <header>
         <img src="https://img.icons8.com/ios-filled/50/ffffff/musical-notes.png" alt="Logo musical" class="logo">
         <h1>Nicol</h1>
     </header>
 
-    <!-- Sección de videos -->
+    <!-- Sección principal de videos -->
     <main>
         <h2>Mis canciones favoritas</h2>
         <div class="video-gallery">
-            <!-- Cada video de YouTube incrustado -->
+            <!-- Reemplaza los IDs de YouTube con los tuyos -->
             <iframe src="https://www.youtube.com/embed/your_video_id1" frameborder="0" allowfullscreen></iframe>
             <iframe src="https://www.youtube.com/embed/your_video_id2" frameborder="0" allowfullscreen></iframe>
             <iframe src="https://www.youtube.com/embed/your_video_id3" frameborder="0" allowfullscreen></iframe>
@@ -32,14 +32,14 @@
 
     <!-- Sección de reproductor por géneros/artistas -->
     <section class="playlist">
-        <h2>Reproductor por géneros</h2>
+        <h2>Explora por géneros</h2>
         <div class="genre-buttons">
             <button onclick="filterVideos('pop')">Pop</button>
             <button onclick="filterVideos('rock')">Rock</button>
             <button onclick="filterVideos('balada')">Balada</button>
         </div>
         <div class="filtered-videos">
-            <!-- Videos filtrados aparecerán aquí -->
+            <!-- Los videos filtrados aparecerán aquí -->
         </div>
     </section>
 
