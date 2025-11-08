@@ -3,33 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nicol - Música Interactiva</title>
+    <title>Nicol - Música YouTube</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Fondo canvas para visualizador -->
     <canvas id="background"></canvas>
 
-    <!-- Encabezado -->
     <header>
         <img src="https://img.icons8.com/ios-filled/50/ffffff/musical-notes.png" alt="Logo musical" class="logo">
         <h1>Nicol</h1>
     </header>
 
-    <!-- Sección de videos -->
     <main>
         <h2>Mis canciones favoritas</h2>
         <div class="video-gallery">
-            <iframe src="https://www.youtube.com/embed/your_video_id1" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/your_video_id2" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/your_video_id3" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/your_video_id4" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/your_video_id5" frameborder="0" allowfullscreen></iframe>
-            <iframe src="https://www.youtube.com/embed/your_video_id6" frameborder="0" allowfullscreen></iframe>
+            <div class="video-container" data-id="your_video_id1"></div>
+            <div class="video-container" data-id="your_video_id2"></div>
+            <div class="video-container" data-id="your_video_id3"></div>
+            <div class="video-container" data-id="your_video_id4"></div>
+            <div class="video-container" data-id="your_video_id5"></div>
+            <div class="video-container" data-id="your_video_id6"></div>
         </div>
     </main>
 
-    <!-- Sección de reproductor por géneros -->
     <section class="playlist">
         <h2>Explora por géneros</h2>
         <div class="genre-buttons">
@@ -40,12 +36,7 @@
         <div class="filtered-videos"></div>
     </section>
 
-    <!-- Audio player invisible para visualizador -->
-    <audio id="audioPlayer" controls>
-        <source src="song.mp3" type="audio/mp3">
-        Tu navegador no soporta el audio.
-    </audio>
-
+    <script src="https://www.youtube.com/iframe_api"></script>
     <script src="script.js"></script>
 </body>
 </html>
