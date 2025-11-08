@@ -1,8 +1,12 @@
+// ========================
+// Crear miniaturas y reproductores
+// ========================
 let players = [];
 const videoContainers = document.querySelectorAll('.video-container');
+let activeVideo = null;
 
 videoContainers.forEach((container, index) => {
-    // Crear la miniatura con título
+    // Crear imagen y título
     const img = document.createElement('img');
     img.src = container.dataset.img;
     const title = document.createElement('div');
@@ -11,27 +15,73 @@ videoContainers.forEach((container, index) => {
     container.appendChild(img);
     container.appendChild(title);
 
-    // Crear el reproductor al hacer clic en la miniatura
+    // Reproducir video al hacer clic
     container.addEventListener('click', () => {
-        container.innerHTML = '';
+        container.innerHTML = ''; // Quitar miniatura
         players[index] = new YT.Player(container, {
             height: '220',
             width: '100%',
             videoId: container.dataset.id,
-            playerVars: { 'rel': 0, 'modestbranding': 1 },
+            playerVars: { 'rel':0,'modestbranding':1 },
             events: { 'onStateChange': onPlayerStateChange }
         });
     });
 });
 
-let activeVideo = null;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) activeVideo = event.target;
     else if (event.data == YT.PlayerState.PAUSED || event.data == YT.PlayerState.ENDED) activeVideo = null;
 }
 
 // ========================
-// Visualizador de partículas simulado
+// Filtro por género
+// ========================
+const videos = [
+    { id:'your_video_id1', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id1/hqdefault.jpg', title:'Tu Boda'},
+    { id:'your_video_id2', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id2/hqdefault.jpg', title:'Suiza'},
+    { id:'your_video_id3', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id3/hqdefault.jpg', title:'We Owen'},
+    { id:'your_video_id4', genre:'pop', img:'https://i.ytimg.com/vi/your_video_id4/hqdefault.jpg', title:'That Should Be Me'},
+    { id:'your_video_id5', genre:'rock', img:'https://i.ytimg.com/vi/your_video_id5/hqdefault.jpg', title:'Canción 5'},
+    { id:'your_video_id6', genre:'balada', img:'https://i.ytimg.com/vi/your_video_id6/hqdefault.jpg', title:'Canción 6'}
+];
+
+function filterVideos(genre) {
+    const container = document.querySelector('.filtered-videos');
+    container.innerHTML = '';
+    const filtered = videos.filter(v => v.genre===genre);
+    filtered.forEach(v=>{
+        const div = document.createElement('div');
+        div.className = 'video-container';
+        div.dataset.id = v.id;
+        div.dataset.img = v.img;
+        div.dataset.title = v.title;
+        container.appendChild(div);
+
+        // Miniatura y título
+        const img = document.createElement('img');
+        img.src = v.img;
+        const title = document.createElement('div');
+        title.className = 'title';
+        title.innerText = v.title;
+        div.appendChild(img);
+        div.appendChild(title);
+
+        // Reproducir al clic
+        div.addEventListener('click', () => {
+            div.innerHTML = '';
+            new YT.Player(div, {
+                height: '220',
+                width: '100%',
+                videoId: v.id,
+                playerVars: { 'rel':0,'modestbranding':1 },
+                events: { 'onStateChange': onPlayerStateChange }
+            });
+        });
+    });
+}
+
+// ========================
+// Partículas animadas
 // ========================
 const canvas = document.getElementById('background');
 const ctx = canvas.getContext('2d');
@@ -66,7 +116,7 @@ for(let i=0;i<150;i++) particles.push(new Particle());
 function animate() {
     ctx.clearRect(0,0,canvas.width,canvas.height);
     const active = activeVideo != null;
-    particles.forEach(p => p.update(active));
+    particles.forEach(p=>p.update(active));
     requestAnimationFrame(animate);
 }
 
