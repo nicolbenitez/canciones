@@ -1,4 +1,4 @@
-// Filtro de videos por género
+// Videos y géneros
 const videos = [
     { id: 'your_video_id1', genre: 'pop' },
     { id: 'your_video_id2', genre: 'rock' },
@@ -8,6 +8,7 @@ const videos = [
     { id: 'your_video_id6', genre: 'balada' },
 ];
 
+// Filtrado de videos por género
 function filterVideos(genre) {
     const container = document.querySelector('.filtered-videos');
     container.innerHTML = '';
@@ -21,42 +22,29 @@ function filterVideos(genre) {
     });
 }
 
-// Fondo animado con partículas suaves
+// Fondo animado con gradiente dinámico
 const canvas = document.getElementById('background');
 const ctx = canvas.getContext('2d');
 canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
-let particles = [];
-for (let i = 0; i < 100; i++) {
-    particles.push({
-        x: Math.random() * canvas.width,
-        y: Math.random() * canvas.height,
-        r: Math.random() * 2 + 1,
-        dx: (Math.random() - 0.5) * 1,
-        dy: (Math.random() - 0.5) * 1
-    });
+let gradientShift = 0;
+
+function drawBackground() {
+    gradientShift += 0.002; // velocidad del gradiente
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, `hsl(${gradientShift*360 % 360}, 70%, 50%)`);
+    gradient.addColorStop(1, `hsl(${(gradientShift*360 + 60) % 360}, 80%, 45%)`);
+
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    requestAnimationFrame(drawBackground);
 }
 
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    particles.forEach(p => {
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = '#ff6f61';
-        ctx.fill();
-        p.x += p.dx;
-        p.y += p.dy;
+drawBackground();
 
-        if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
-        if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
-    });
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-// Ajuste canvas al redimensionar
+// Ajustar canvas al cambiar tamaño de ventana
 window.addEventListener('resize', () => {
     canvas.width = window.innerWidth;
     canvas.height = window.innerHeight;
