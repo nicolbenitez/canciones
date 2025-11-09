@@ -1,8 +1,9 @@
-// scripts.js — Fondo con brillos multicolor + reproducción YouTube
+// scripts.js — Fondo con brillos animados 3D + YouTube player
 window.onload = function() {
   const player = document.getElementById('player');
   const now = document.getElementById('now');
 
+  // Reproducir canción seleccionada
   window.playVideo = function(videoId, songName) {
     player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     now.textContent = `🎶 Reproduciendo: ${songName}`;
@@ -16,44 +17,51 @@ window.onload = function() {
   let lights = [];
 
   function rand(min, max){ return Math.random()*(max-min)+min; }
+
   function createLights(){
     lights = [];
-    const count = Math.floor((w*h)/120000)+45;
+    const count = Math.floor((w*h)/120000)+60;
     for(let i=0;i<count;i++){
       lights.push({
         x:Math.random()*w,
         y:Math.random()*h,
-        r:rand(1.2,4.2),
-        dx:rand(-0.6,0.6),
-        dy:rand(-0.6,0.6),
-        hue:rand(320,400),
-        sat:rand(60,100),
-        light:rand(60,85),
-        alpha:rand(0.25,0.9),
-        glow:rand(18,56)
+        z:rand(0.2,1.2),
+        r:rand(1,4),
+        dx:rand(-0.5,0.5),
+        dy:rand(-0.5,0.5),
+        hue:rand(300,400),
+        sat:rand(70,100),
+        light:rand(60,90),
+        alpha:rand(0.25,0.9)
       });
     }
   }
+
   createLights();
-  window.addEventListener('resize',()=>{
-    w=canvas.width=window.innerWidth;
-    h=canvas.height=window.innerHeight;
+
+  window.addEventListener('resize', ()=>{
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
     createLights();
   });
 
   function draw(){
     ctx.clearRect(0,0,w,h);
     for(const p of lights){
-      p.x+=p.dx; p.y+=p.dy;
-      if(p.x<-60)p.x=w+60;
-      if(p.x>w+60)p.x=-60;
-      if(p.y<-60)p.y=h+60;
-      if(p.y>h+60)p.y=-60;
-      const grad=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.glow);
+      p.x += p.dx * p.z;
+      p.y += p.dy * p.z;
+      if(p.x<0) p.x=w;
+      if(p.x>w) p.x=0;
+      if(p.y<0) p.y=h;
+      if(p.y>h) p.y=0;
+
+      const grad = ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*20);
       grad.addColorStop(0,`hsla(${p.hue},${p.sat}%,${p.light}%,${p.alpha})`);
       grad.addColorStop(1,`hsla(${p.hue},${p.sat}%,${p.light}%,0)`);
-      ctx.fillStyle=grad;
-      ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2); ctx.fill();
+      ctx.fillStyle = grad;
+      ctx.beginPath();
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fill();
     }
     requestAnimationFrame(draw);
   }
