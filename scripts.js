@@ -1,15 +1,18 @@
-// scripts.js — Fondo con brillos animados 3D + YouTube player
+// Fondo con brillos animados + efecto de sonido al clic
 window.onload = function() {
   const player = document.getElementById('player');
   const now = document.getElementById('now');
+  const ping = document.getElementById('pingSound');
 
   // Reproducir canción seleccionada
   window.playVideo = function(videoId, songName) {
+    ping.currentTime = 0;
+    ping.play(); // efecto de sonido
     player.src = `https://www.youtube.com/embed/${videoId}?autoplay=1`;
     now.textContent = `🎶 Reproduciendo: ${songName}`;
   };
 
-  // Fondo con brillos
+  // Fondo de brillos
   const canvas = document.getElementById('bgCanvas');
   const ctx = canvas.getContext('2d');
   let w = canvas.width = window.innerWidth;
