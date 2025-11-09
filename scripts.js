@@ -1,107 +1,80 @@
-/* scripts.js
-   - playVideo(videoId, title): cambia el iframe para reproducir la canción.
-   - canvas neón: partículas suaves que se mueven y crean brillos.
-   Nota: el código está envuelto en onload para compatibilidad con GitHub Pages.
-*/
+window.onload = function(){
+  const player = document.getElementById('player');
+  const now = document.getElementById('now');
 
-window.onload = function () {
-  // ---- Reproductor ----
-  window.playVideo = function (videoId, songName) {
-    const player = document.getElementById('player');
-    const now = document.getElementById('now');
-    // Cambia src (no incluimos autoplay por bloqueo de navegadores),
-    // el usuario hace click en la tarjeta para activar el audio.
-    player.src = `https://www.youtube.com/embed/${videoId}`;
-    now.textContent = `🎶 Reproduciendo: ${songName}`;
+  const playlist = [
+    {id:'sD9UX5_GiUc', title:'Tu Boda — Óscar Maydon'},
+    {id:'SOh_BsKlajw', title:'Suiza — Calle 24'},
+    {id:'-uvIf9cSegE', title:'Made For You — Jake Owen'},
+    {id:'p5Jw-T4dVss', title:'That Should Be Me — Justin Bieber'},
+    {id:'GGQmKA15VCk', title:"What We Ain’t Got — Jake Owen"},
+  ];
+  let current = 0;
+
+  window.playVideo = function(id,title){
+    player.src=`https://www.youtube.com/embed/${id}?autoplay=1`;
+    now.textContent=`🎶 Reproduciendo: ${title}`;
   };
 
-  // ---- Canvas fondo neón con partículas ----
-  const canvas = document.getElementById('bgCanvas');
-  if (!canvas) return;
-  const ctx = canvas.getContext('2d');
+  // Botón Play All
+  document.getElementById('playAll').addEventListener('click',()=>{
+    current = 0;
+    playNext();
+  });
 
-  let w = canvas.width = window.innerWidth;
-  let h = canvas.height = window.innerHeight;
-  const particles = [];
-  const COUNT = Math.floor((w*h) / 90000) + 40; // cantidad ajustada según pantalla
+  function playNext(){
+    if(current >= playlist.length) current = 0;
+    playVideo(playlist[current].id, playlist[current].title);
+    current++;
+    // Duración promedio 3:30 -> 210000 ms
+    setTimeout(playNext,210000);
+  }
 
-  function rand(min, max){ return Math.random() * (max - min) + min; }
-
-  function initParticles(){
-    particles.length = 0;
-    for(let i=0;i<COUNT;i++){
-      particles.push({
-        x: rand(0,w),
-        y: rand(0,h),
-        vx: rand(-0.25,0.25),
-        vy: rand(-0.25,0.25),
-        r: rand(0.8,3.2),
-        glow: rand(8,28),
-        hue: rand(310,345) // tonos rosa-magenta
+  // Fondo luces tipo discoteca
+  const c = document.getElementById('bgCanvas');
+  const ctx = c.getContext('2d');
+  let w,h;
+  const lights=[];
+  function resize(){
+    w = c.width = window.innerWidth;
+    h = c.height = window.innerHeight;
+    lights.length=0;
+    for(let i=0;i<50;i++){
+      lights.push({
+        x:Math.random()*w,
+        y:Math.random()*h,
+        r:Math.random()*3+2,
+        dx:(Math.random()-0.5)*0.8,
+        dy:(Math.random()-0.5)*0.8,
+        color:`hsl(${Math.random()*30+320},100%,70%)`
       });
     }
   }
-
-  initParticles();
-
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-    initParticles();
-  }
-  window.addEventListener('resize', resize);
-
-  // Dibuja fondo degradado sutil (ya también presente en CSS)
-  function drawBackground(){
-    const g = ctx.createLinearGradient(0,0,w,h);
-    g.addColorStop(0, 'rgba(255,140,200,0.08)');
-    g.addColorStop(0.5, 'rgba(255,115,190,0.06)');
-    g.addColorStop(1, 'rgba(255,95,175,0.04)');
-    ctx.fillStyle = g;
-    ctx.fillRect(0,0,w,h);
-  }
+  window.addEventListener('resize',resize);
+  resize();
 
   function draw(){
-    // suaviza el trazo para glow
     ctx.clearRect(0,0,w,h);
-    drawBackground();
+    const grd=ctx.createRadialGradient(w/2,h/2,100,w/2,h/2,h/1.2);
+    grd.addColorStop(0,'#ff66b2');
+    grd.addColorStop(1,'#b30086');
+    ctx.fillStyle=grd;
+    ctx.fillRect(0,0,w,h);
 
-    // dibujar partículas con glow
-    for(const p of particles){
-      // movimiento
-      p.x += p.vx;
-      p.y += p.vy;
-
-      // rebote suave en bordes
-      if(p.x < -50) p.x = w + 50;
-      if(p.x > w + 50) p.x = -50;
-      if(p.y < -50) p.y = h + 50;
-      if(p.y > h + 50) p.y = -50;
-
-      // glow
-      const grad = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.glow);
-      grad.addColorStop(0, `hsla(${p.hue},95%,70%,0.95)`);
-      grad.addColorStop(0.3, `hsla(${p.hue},95%,70%,0.35)`);
-      grad.addColorStop(1, `hsla(${p.hue},95%,70%,0)`);
-
-      ctx.fillStyle = grad;
+    for(const p of lights){
       ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*8);
+      glow.addColorStop(0,p.color);
+      glow.addColorStop(1,'transparent');
+      ctx.fillStyle=glow;
       ctx.fill();
+      p.x+=p.dx;
+      p.y+=p.dy;
+      if(p.x<0||p.x>w)p.dx*=-1;
+      if(p.y<0||p.y>h)p.dy*=-1;
     }
-
     requestAnimationFrame(draw);
   }
-
-  // start
   draw();
-
-  // ---- accesibilidad: permitir reproducir con Enter cuando la card está enfocada ----
-  document.querySelectorAll('.card').forEach(card => {
-    card.addEventListener('keydown', (e) => {
-      if(e.key === 'Enter' || e.key === ' ') {
-        card.click();
-      }
-    });
-  });
 };
