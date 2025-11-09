@@ -1,104 +1,162 @@
-/* 💗 Estilo general con fondo rosado y tipografía elegante */
-body {
-  margin: 0;
-  font-family: "Poppins", sans-serif;
-  background: radial-gradient(circle at top left, #ffcce0, #ffb6c1, #ff9ec7);
-  color: #4b2a38;
-  overflow-x: hidden;
+/* ============================
+   Barbie Glam — styles.css
+   ============================ */
+
+/* Variables de color */
+:root{
+  --bg1:#ff8fd6;
+  --bg2:#ff5fb1;
+  --accent:#ff66b2;
+  --white: #fff;
+  --text: #2b0b12;
+  --glass: rgba(255,255,255,0.12);
 }
 
-canvas#bgCanvas {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 0;
+/* Reset mínimo */
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: 'Poppins', system-ui, sans-serif;
+  background: linear-gradient(180deg,var(--bg1),var(--bg2));
+  color:var(--text);
+  -webkit-font-smoothing:antialiased;
+  -moz-osx-font-smoothing:grayscale;
+  overflow-x:hidden;
 }
 
-/* 🌸 Contenedor principal */
-.container {
-  position: relative;
-  z-index: 1;
-  text-align: center;
-  padding: 30px;
+/* Canvas fondo ocupa todo */
+canvas#bgCanvas{position:fixed;inset:0;z-index:0}
+
+/* Contenedor principal */
+.site{
+  position:relative;
+  z-index:2;
+  max-width:1100px;
+  margin:0 auto;
+  padding:36px 20px 80px;
+  text-align:center;
 }
 
-/* ✨ Título elegante y cursivo */
-.title {
-  font-family: "Great Vibes", cursive;
-  font-size: 6em;
+/* Top: mini-logo + nombre + tagline */
+.top{margin-bottom:10px}
+.mini-logo{font-size:20px; background:rgba(255,255,255,0.08); display:inline-block; padding:8px 10px; border-radius:12px; color:var(--white); box-shadow:0 6px 18px rgba(255,102,178,0.12)}
+.nicol, .title, .nicol { /* target if used elsewhere */ }
+
+/* Nombre grande en cursiva y neón */
+.nicol{
+  font-family: 'Great Vibes', cursive;
+  font-size: 6.5rem;              /* grande */
+  line-height:0.85;
+  margin: 10px 0 6px;
+  color: var(--white);
+  letter-spacing:2px;
+  /* Efecto neón + glow */
+  text-shadow:
+    0 0 6px rgba(255,102,178,0.9),
+    0 0 18px rgba(255,102,178,0.7),
+    0 0 36px rgba(255,102,178,0.5),
+    0 6px 18px rgba(0,0,0,0.2);
+  transform: translateY(-4px);
+}
+
+/* Tagline "Girls" look */
+.tagline{
+  margin:0 0 24px;
   color: #fff;
-  text-shadow: 0 0 15px #ff66b2, 0 0 30px #ff80bf;
-  margin: 0;
+  font-weight:600;
+  background: linear-gradient(90deg, rgba(255,255,255,0.12), rgba(255,255,255,0.06));
+  display:inline-block;
+  padding:8px 14px;
+  border-radius:18px;
+  box-shadow:0 8px 22px rgba(255,102,178,0.08);
 }
 
-.subtitle {
-  font-size: 1.4em;
-  color: #fff;
-  font-weight: 600;
-  margin-bottom: 30px;
+/* Reproductor */
+.player-wrap{
+  margin: 10px auto 28px;
+  max-width: 720px;
+  border-radius:18px;
+  overflow:hidden;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.03));
+  box-shadow: 0 8px 30px rgba(0,0,0,0.18);
+  padding:10px;
+}
+.player-wrap iframe{
+  width:100%;
+  height:420px;
+  border:0;
+  border-radius:12px;
+  display:block;
+  background:#000;
+}
+#now{
+  margin-top:10px;
+  color:var(--white);
+  font-weight:600;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.35);
 }
 
-/* 💖 Reproductor */
-.player-section {
-  margin: 20px auto;
-  max-width: 560px;
-  border-radius: 20px;
-  overflow: hidden;
-  box-shadow: 0 0 25px rgba(255, 182, 193, 0.6);
-}
-
-iframe {
-  width: 100%;
-  height: 315px;
-  border: none;
-}
-
-#current-song {
-  margin-top: 10px;
-  font-size: 1.1em;
-  color: #fff;
-}
-
-/* 🎵 Galería */
-.gallery {
-  margin-top: 40px;
-}
-
-.grid {
-  display: grid;
+/* Galería */
+.gallery{margin-top:30px}
+.grid{
+  display:grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 25px;
+  gap:20px;
+  align-items:start;
+  margin-top:10px;
 }
 
-.card {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 20px;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 15px rgba(255, 150, 200, 0.5);
-  cursor: pointer;
-  transition: transform 0.3s, box-shadow 0.3s;
+/* Tarjetas glam */
+.card{
+  position:relative;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+  border-radius:18px;
+  padding-bottom:10px;
+  overflow:hidden;
+  cursor:pointer;
+  transition: transform .28s ease, box-shadow .28s ease;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.card:hover{
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 40px rgba(255,80,160,0.14);
+}
+.card img{
+  width:100%;
+  height:140px;
+  object-fit:cover;
+  display:block;
+  border-radius:18px 18px 0 0;
+}
+.caption{
+  color:var(--white);
+  font-weight:600;
+  margin:12px;
 }
 
-.card:hover {
-  transform: scale(1.05);
-  box-shadow: 0 0 25px rgba(255, 100, 150, 0.8);
+/* Corazon decorativo */
+.card .heart{
+  position:absolute;
+  right:12px;
+  top:10px;
+  font-size:18px;
+  transform:scale(1);
+  transition: transform .25s ease;
+  filter: drop-shadow(0 6px 12px rgba(255,80,160,0.2));
+}
+.card:hover .heart{ transform: scale(1.18) }
+
+/* Footer */
+.foot{
+  margin-top:36px;
+  color:rgba(255,255,255,0.9);
+  font-weight:500;
 }
 
-.card img {
-  width: 100%;
-  border-radius: 20px 20px 0 0;
-}
-
-.card p {
-  margin: 10px;
-  color: #fff;
-  font-weight: 600;
-}
-
-/* 💫 Footer */
-.footer {
-  margin-top: 50px;
-  font-size: 1em;
-  color: #fff;
-  opacity: 0.8;
+/* Responsive */
+@media (max-width:640px){
+  .nicol{ font-size:4.2rem }
+  .player-wrap iframe{ height: 260px }
+  .card img{ height:120px }
 }
