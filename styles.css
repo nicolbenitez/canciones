@@ -1,147 +1,134 @@
-/* Barbie Glam — layout lista izquierda, player derecha */
-/* variables */
-:root{
-  --pink1:#ff40a1;
-  --pink2:#ff7ecb;
-  --white:#ffffff;
-  --glass: rgba(255,255,255,0.06);
-  --shadow: rgba(0,0,0,0.25);
+:root {
+  --pink1: #ff40a1;
+  --pink2: #ff7ecb;
+  --violet: #b06fcf;
+  --white: #ffffff;
 }
 
-/* reset básico */
-*{box-sizing:border-box}
-html,body{height:100%;margin:0}
-body{
+/* General */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
   font-family: 'Poppins', sans-serif;
-  color:var(--white);
+  color: var(--white);
   background: linear-gradient(180deg, #ff6ebe, #b43c82);
-  overflow-x:hidden;
+  overflow-x: hidden;
+  min-height: 100vh;
 }
 
-/* canvas */
-canvas#bgCanvas{position:fixed;inset:0;z-index:0}
+/* Fondo con brillos */
+canvas#bgCanvas {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+}
 
-/* encabezado fijo con nombre */
-.fixed-header{
-  position:fixed;top:0;left:0;right:0;
-  z-index:12;
-  background: rgba(0,0,0,0.06);
+/* Nombre fijo */
+.fixed-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(6px);
-  padding:14px 0;
-  text-align:center;
-  box-shadow: 0 6px 18px rgba(0,0,0,0.18);
+  z-index: 10;
+  padding: 12px 0;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-.nicol{
-  font-family:'Great Vibes',cursive;
-  margin:0;
-  font-size:3.2rem;
-  color:var(--white);
-  text-shadow:0 0 10px rgba(255,102,178,0.9),0 0 24px rgba(255,80,160,0.7);
+.nicol {
+  font-family: 'Great Vibes', cursive;
+  font-size: 5rem;
+  color: var(--white);
+  margin: 0;
+  text-shadow: 0 0 15px rgba(255, 120, 200, 0.9), 0 0 30px rgba(255, 100, 180, 0.7);
   animation: neonPulse 3s infinite alternate;
 }
-@keyframes neonPulse{
-  0%{ text-shadow:0 0 8px rgba(255,120,190,0.8); }
-  100%{ text-shadow:0 0 18px rgba(255,160,200,1); }
+@keyframes neonPulse {
+  0% {
+    text-shadow: 0 0 10px rgba(255, 120, 190, 0.8),
+                 0 0 20px rgba(255, 80, 160, 0.6);
+  }
+  100% {
+    text-shadow: 0 0 20px rgba(255, 160, 200, 1),
+                 0 0 45px rgba(255, 120, 185, 0.9);
+  }
 }
 
-/* layout principal: grid con dos columnas */
-.layout{
-  display:grid;
-  grid-template-columns: 360px 1fr; /* izquierda fijo, derecha fluida */
-  gap:28px;
-  max-width:1200px;
-  margin:120px auto 80px; /* espacio para header fijo */
-  padding:0 18px;
-  z-index:2;
-  position:relative;
+/* Contenido */
+.site {
+  position: relative;
+  z-index: 2;
+  max-width: 1100px;
+  margin: 180px auto 60px;
+  padding: 0 20px;
+  text-align: center;
 }
 
-/* LISTA (izquierda) */
-.playlist{
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  border-radius:16px;
-  padding:14px;
-  box-shadow: 0 10px 30px var(--shadow);
-  height: calc(100vh - 180px);
-  overflow:auto;
-  border:1px solid rgba(255,255,255,0.04);
+/* Player */
+.player-wrap {
+  margin: 20px auto;
+  max-width: 760px;
+  border-radius: 18px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
 }
-.list-title{
-  margin:2px 0 12px;
-  font-weight:700;
-  color:var(--white);
-  text-align:left;
+.player-wrap iframe {
+  width: 100%;
+  height: 420px;
+  border: 0;
 }
-
-/* items estilo YouTube vertical */
-.list{
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-.list-item{
-  display:flex;
-  gap:12px;
-  align-items:center;
-  background: rgba(0,0,0,0.04);
-  padding:8px;
-  border-radius:10px;
-  border:1px solid rgba(255,255,255,0.03);
-  cursor:pointer;
-  text-align:left;
-  color:var(--white);
-}
-.list-item img{
-  width:110px;
-  height:62px;
-  object-fit:cover;
-  border-radius:8px;
-  flex-shrink:0;
-  box-shadow:0 6px 18px rgba(0,0,0,0.25);
-}
-.list-item .meta{display:flex;flex-direction:column}
-.list-item .song{font-weight:700}
-.list-item .artist{font-size:0.9rem;opacity:0.85}
-
-/* PLAYER (derecha) */
-.player-area{
-  display:flex;
-  align-items:flex-start;
-  justify-content:center;
-}
-.player-box{
-  width:100%;
-  max-width:760px;
-  border-radius:16px;
-  overflow:hidden;
-  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
-  box-shadow:0 12px 40px rgba(0,0,0,0.25);
-  border:1px solid rgba(255,255,255,0.03);
-  padding:10px;
-  position:sticky;
-  top:96px; /* queda visible mientras se scrollea */
-}
-.player-box iframe{
-  width:100%;
-  height:420px;
-  border:0;
-  border-radius:10px;
-  display:block;
-}
-.now{margin-top:10px;font-weight:700;text-shadow:0 2px 6px rgba(0,0,0,0.4)}
-
-/* tarjetas hover */
-.list-item:hover, .list-item:focus{
-  transform:translateY(-4px);
-  box-shadow:0 18px 42px rgba(255,0,140,0.12);
-  outline:none;
+.now {
+  margin-top: 8px;
+  font-weight: 600;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-/* responsive: en móvil apilar verticalmente (player arriba, lista abajo) */
-@media (max-width:900px){
-  .layout{ grid-template-columns: 1fr; margin:140px 12px 60px; gap:18px; }
-  .playlist{ height:auto; max-height:none; order:2 }
-  .player-box{ position:relative; top:0; order:1; height:auto }
-  .nicol{ font-size:2.6rem }
-  .list-item img{ width:120px; height:72px }
+/* Galería */
+.gallery { margin-top: 26px; }
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+.card {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  cursor: pointer;
+  background: rgba(255, 255, 255, 0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 18px 50px rgba(255, 0, 150, 0.15);
+}
+.card img {
+  width: 100%;
+  height: 140px;
+  object-fit: cover;
+}
+.caption {
+  padding: 12px;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.02);
+}
+.heart {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font-size: 18px;
+}
+
+/* Footer */
+.foot {
+  margin-top: 36px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+/* Responsive */
+@media (max-width: 720px) {
+  .nicol { font-size: 3rem; }
+  .player-wrap iframe { height: 260px; }
 }
