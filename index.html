@@ -15,7 +15,9 @@
   <main class="container">
     <header class="header">
       <div class="logo">
-        <svg width="40" height="40" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/></svg>
+        <svg width="40" height="40" viewBox="0 0 24 24">
+          <path fill="currentColor" d="M12 3v10.55A4 4 0 1 0 14 17V7h4V3h-6z"/>
+        </svg>
       </div>
       <h1 class="title">Nicol</h1>
       <p class="subtitle">🎶 Mi lista de canciones favoritas</p>
@@ -26,36 +28,29 @@
       <p id="current-song">🎵 Reproduciendo: Tu Boda — Óscar Maydon</p>
     </section>
 
-    <div class="filter-buttons">
-      <button onclick="filterSongs('all')">🎧 Todos</button>
-      <button onclick="filterSongs('regional')">🎤 Regional</button>
-      <button onclick="filterSongs('pop')">💗 Pop</button>
-      <button onclick="filterSongs('country')">🤠 Country</button>
-    </div>
-
     <section class="gallery">
       <div class="grid">
-        <div class="card" data-genre="regional" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
+        <div class="card" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
           <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda">
           <p>Tu Boda — Óscar Maydon</p>
         </div>
 
-        <div class="card" data-genre="regional" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
+        <div class="card" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
           <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza">
           <p>Suiza — Calle 24</p>
         </div>
 
-        <div class="card" data-genre="country" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
+        <div class="card" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
           <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You">
           <p>Made For You — Jake Owen</p>
         </div>
 
-        <div class="card" data-genre="pop" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
+        <div class="card" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
           <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me">
           <p>That Should Be Me — Justin Bieber</p>
         </div>
 
-        <div class="card" data-genre="country" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
+        <div class="card" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
           <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain’t Got">
           <p>What We Ain’t Got — Jake Owen</p>
         </div>
