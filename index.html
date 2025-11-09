@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nicol — Barbie Glam</title>
+  <title>Nicol — Glam Music</title>
 
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
@@ -13,47 +13,47 @@
   <!-- Fondo con brillos -->
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
-  <header class="fixed-header">
-    <h1 id="nicol" class="nicol">Nicol</h1>
-  </header>
+  <!-- Nombre centrado -->
+  <div class="center-name">
+    <h1 class="nicol">Nicol</h1>
+  </div>
 
+  <!-- Contenido principal -->
   <main class="site" role="main">
-    <!-- Reproductor -->
     <section class="player-wrap" aria-label="Reproductor">
       <iframe id="player" src="https://www.youtube.com/embed/sD9UX5_GiUc"
         title="Reproductor de Nicol" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
       </iframe>
-      <div id="now" class="now" aria-live="polite">🎶 Reproduciendo: Tu Boda — Óscar Maydon</div>
+      <div id="now" class="now">🎶 Reproduciendo: Tu Boda — Óscar Maydon</div>
     </section>
 
-    <!-- Galería -->
     <section class="gallery" aria-label="Galería de canciones">
       <div class="grid">
-        <div class="card" tabindex="0" role="button" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
+        <div class="card" onclick="playVideo('sD9UX5_GiUc','Tu Boda — Óscar Maydon')">
           <div class="heart">💗</div>
           <img src="https://img.youtube.com/vi/sD9UX5_GiUc/hqdefault.jpg" alt="Tu Boda — portada">
           <div class="caption">Tu Boda — Óscar Maydon</div>
         </div>
 
-        <div class="card" tabindex="0" role="button" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
+        <div class="card" onclick="playVideo('SOh_BsKlajw','Suiza — Calle 24')">
           <div class="heart">💗</div>
           <img src="https://img.youtube.com/vi/SOh_BsKlajw/hqdefault.jpg" alt="Suiza — portada">
           <div class="caption">Suiza — Calle 24</div>
         </div>
 
-        <div class="card" tabindex="0" role="button" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
+        <div class="card" onclick="playVideo('-uvIf9cSegE','Made For You — Jake Owen')">
           <div class="heart">💗</div>
           <img src="https://img.youtube.com/vi/-uvIf9cSegE/hqdefault.jpg" alt="Made For You — portada">
           <div class="caption">Made For You — Jake Owen</div>
         </div>
 
-        <div class="card" tabindex="0" role="button" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
+        <div class="card" onclick="playVideo('p5Jw-T4dVss','That Should Be Me — Justin Bieber')">
           <div class="heart">💗</div>
           <img src="https://img.youtube.com/vi/p5Jw-T4dVss/hqdefault.jpg" alt="That Should Be Me — portada">
           <div class="caption">That Should Be Me — Justin Bieber</div>
         </div>
 
-        <div class="card" tabindex="0" role="button" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
+        <div class="card" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
           <div class="heart">💗</div>
           <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain’t Got — portada">
           <div class="caption">What We Ain’t Got — Jake Owen</div>
@@ -61,7 +61,7 @@
       </div>
     </section>
 
-    <footer class="foot">💖 Made with glam by Nicol 💖</footer>
+    <footer class="foot">💖 Creado con amor y brillo por Nicol 💖</footer>
   </main>
 
   <script src="scripts.js"></script>
