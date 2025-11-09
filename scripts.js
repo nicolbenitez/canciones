@@ -1,5 +1,5 @@
 window.onload = function () {
-  // 🎵 Reproductor
+  // 🎵 Reproductor de YouTube
   window.playVideo = function (videoId, songName) {
     const player = document.getElementById("player");
     const currentSong = document.getElementById("current-song");
@@ -7,14 +7,7 @@ window.onload = function () {
     currentSong.textContent = `🎶 Reproduciendo: ${songName}`;
   };
 
-  // 🎧 Filtros
-  window.filterSongs = function (genre) {
-    document.querySelectorAll(".card").forEach(card => {
-      card.style.display = (genre === "all" || card.dataset.genre === genre) ? "block" : "none";
-    });
-  };
-
-  // 🌸 Fondo animado
+  // 🌸 Fondo animado con partículas
   const canvas = document.getElementById("bgCanvas");
   const ctx = canvas.getContext("2d");
   let w, h;
