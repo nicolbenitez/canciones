@@ -3,32 +3,26 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Nicol — Barbie Glam Deluxe</title>
+  <title>Nicol — Barbie Glam</title>
 
   <link rel="stylesheet" href="styles.css" />
   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
   <link rel="icon" href="https://cdn-icons-png.flaticon.com/512/727/727245.png">
 </head>
 <body>
-  <!-- Canvas para fondo con brillos multicolor -->
+  <!-- Fondo con brillos -->
   <canvas id="bgCanvas" aria-hidden="true"></canvas>
 
+  <header class="fixed-header">
+    <h1 id="nicol" class="nicol">Nicol</h1>
+  </header>
+
   <main class="site" role="main">
-    <!-- Cabecera / Portada central -->
-    <header class="hero" aria-hidden="false">
-      <h1 id="nicol" class="nicol">Nicol</h1>
-      <p class="tagline">Girls • Pink • Glam</p>
-
-      <!-- Botón Play All -->
-      <div class="controls">
-        <button id="playAll" class="playall" aria-label="Reproducir todo">▶️ Play All</button>
-      </div>
-    </header>
-
     <!-- Reproductor -->
     <section class="player-wrap" aria-label="Reproductor">
-      <iframe id="player" src="https://www.youtube.com/embed/sD9UX5_GiUc" title="Reproductor de Nicol"
-        allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+      <iframe id="player" src="https://www.youtube.com/embed/sD9UX5_GiUc"
+        title="Reproductor de Nicol" allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen>
+      </iframe>
       <div id="now" class="now" aria-live="polite">🎶 Reproduciendo: Tu Boda — Óscar Maydon</div>
     </section>
 
@@ -61,8 +55,8 @@
 
         <div class="card" tabindex="0" role="button" onclick="playVideo('GGQmKA15VCk','What We Ain’t Got — Jake Owen')">
           <div class="heart">💗</div>
-          <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain't Got — portada">
-          <div class="caption">What We Ain't Got — Jake Owen</div>
+          <img src="https://img.youtube.com/vi/GGQmKA15VCk/hqdefault.jpg" alt="What We Ain’t Got — portada">
+          <div class="caption">What We Ain’t Got — Jake Owen</div>
         </div>
       </div>
     </section>
